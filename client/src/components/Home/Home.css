@@ -1,0 +1,36 @@
+/* HomePage.css */
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+   }
+
+.home-page .card{
+    justify-content:center
+}
+   
+   .home-page h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+   }
+   
+   .home-page .search-bar {
+    margin-bottom: 20px;
+   }
+   
+   .home-page .driver-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    width: 100%;
+   }
+   
+   .home-page .pagination {
+    margin-top: 20px;
+   }
+   
