@@ -1,13 +1,13 @@
-const reachDbApi = require('../../controllers/reachDbApi.js');
 const { Driver } = require('../db.js')
 const defImage = '../media/default.jpg'
+const axios = require('axios')
 const getDrivers = async (req, res) => {
   try {
     const dbDrivers = await Driver.findAll();
-    const apiDrivers = await reachDbApi('/drivers')(req, res);
+    const apiDrivers = await axios.get("http://localhost:5000/drivers")
     const combinedDrivers = [
       ...dbDrivers.map(driver => driver.dataValues),
-      ...(apiDrivers || []),
+      ...(apiDrivers.data || []),
     ];
     const driversWithImages = combinedDrivers.map(driver => ({
       ...driver,

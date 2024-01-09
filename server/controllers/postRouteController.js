@@ -1,14 +1,14 @@
 const { Driver, Team } = require('../src/db.js');
 
-async function createDriver({ name, lastName, description, image, nationality, birthDate, teamIds }) {
+async function createDriver({ nombre, apellido, descripcion, imagen, nacionalidad, fechaNacimiento, teamIds }) {
   try {
     const newDriver = await Driver.create({
-      name,
-      lastName,
-      description,
-      image,
-      nationality,
-      birthDate,
+      name: nombre,
+      lastName: apellido,
+      description: descripcion,
+      image: imagen,
+      nationality: nacionalidad,
+      birthDate: fechaNacimiento,
     });
 
     if (teamIds && teamIds.length > 0) {

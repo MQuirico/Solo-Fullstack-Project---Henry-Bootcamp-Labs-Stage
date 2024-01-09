@@ -1,4 +1,32 @@
-/* HomePage.css */
+#search-bar-container {
+    display: flex;
+    align-items: center;
+    max-width: 200%;
+    border-radius: 20%;
+    justify-content:flex-end;
+    margin-top: 100px
+  }
+#homeP {
+    background-image: url('../../../Fotos\ F1\ PI/2.jpg');
+    width: 100%;
+  height: 100vh; /* 100% de la altura del viewport */
+  padding: 0;
+  box-sizing: border-box;
+  top: 0;
+  padding: 0
+}
+
+#filters{
+  display:flex;
+  width:550px;
+  background-color:azure;
+  margin-left: 500px;
+}
+
+#filters input{
+  width: 20px;
+}
+
 
 .home-page {
     display: flex;
@@ -34,3 +62,7 @@
     margin-top: 20px;
    }
    
+   html, body {
+    margin: 0;
+    padding: 0;
+  }

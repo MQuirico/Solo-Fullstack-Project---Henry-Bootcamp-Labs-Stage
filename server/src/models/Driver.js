@@ -2,10 +2,9 @@ const { DataTypes } = require ('sequelize');
 module.exports = (sequelize) => {
   const Driver = sequelize.define('Driver', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,

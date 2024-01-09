@@ -1,14 +1,13 @@
 const { get } = require('axios');
 
-module.exports = function reachDbApi(filePath) {
-  return async (req, res) => {
-    try {
-      const localData = await get(`http://localhost:5000${filePath}`);
-      const externalData = await get(`http://localhost:5000${filePath}`);
-      res.json(externalData.data || localData.data);
+const reachDbApi = async (idDriver) => {
+     try {
+      const {data} = await get(`http://localhost:5000/drivers/${idDriver}`)
+      return data;
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al obtener los datos', message: error.message });
+      throw new Error ("error", error)
     }
   };
-};
+
+  module.exports = reachDbApi;

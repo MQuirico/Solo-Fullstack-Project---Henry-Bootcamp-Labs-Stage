@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Landing.css'; // Importar la hoja de estilos
-
+import './Landing.css'; 
 function Landing() {
   return (
     <div id="land" className="blog">
       <Link to="/Home">
-        <button>Clic aquí para ingresar</button>
+        <button id='ingresar'>Clic aquí para ingresar</button>
       </Link>
-      <header className="header">
-        <h1>
+      <header id="header">
+        <h1 id='title'>
           <u>🏁DRIVERS</u>
         </h1>
-        <img src="../Form1.png" alt="Logo" />
+        <img id='imgF1' src="../Form1.png" alt="Logo" />
       </header>
       <div className="descripcion">
         <section className="intro">

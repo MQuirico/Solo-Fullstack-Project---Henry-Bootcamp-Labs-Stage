@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {searchDrivers} from '../../redux/actionCreator.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchDrivers } from '../../redux/actionCreator.js';
 import './SearchBar.css';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
+  const searchResults = useSelector((state) => state.search.searchResults);
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -15,8 +16,10 @@ const SearchBar = () => {
     dispatch(searchDrivers(searchTerm));
   };
 
+  console.log("Search results:", searchResults);
+  
   return (
-    <div className="search-bar-container">
+    <div id="search-bar-container">
       <input
         id="search"
         type="text"
@@ -24,7 +27,7 @@ const SearchBar = () => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-    <button onClick={handleSearch}>Buscar</button>
+      <button id='boton' onClick={handleSearch}>Buscar</button>
     </div>
   );
 };

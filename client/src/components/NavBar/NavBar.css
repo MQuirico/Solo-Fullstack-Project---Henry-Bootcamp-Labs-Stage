@@ -1,0 +1,30 @@
+#logo {
+    height: 92px;
+    width: 120px;
+    position: fixed;
+    right: 0;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f71414;
+    z-index: 1000;
+    text-align: left;
+   }
+   
+   nav a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: larger
+   }
+   
+   nav a:hover {
+    background-color: #ddd;
+    color: black;
+   }
+   

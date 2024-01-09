@@ -1,5 +1,6 @@
 import React from 'react';
 import './Pagination.css'
+
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const generatePageNumbers = () => {
       const pageNumbers = [];
@@ -26,7 +27,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           Anterior
         </button>
         {generatePageNumbers().map((pageNumber) => (
-          <button
+          <button style={{
+      backgroundColor: '#4CAF50', 
+      color: 'white',             
+      fontSize: '16px',           
+      margin: '5px',              
+    }}
             className={pageNumber === currentPage ? 'pages current-page' : 'pages'}
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
@@ -43,3 +49,4 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   };
   
   export default Pagination;
+

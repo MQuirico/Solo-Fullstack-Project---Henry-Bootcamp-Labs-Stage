@@ -1,19 +1,15 @@
-/* FormPage.css */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+
   
   form {
-    width: 400px;
+    width: 420px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #cccccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #da8846;
+    justify-content: center;
+    margin-top: 50px; /* Ajusta este valor según sea necesario para mover el formulario hacia abajo */
   }
-  
   h1 {
     text-align: center;
     color: #333;
@@ -23,6 +19,7 @@
     display: block;
     margin-bottom: 8px;
     color: #555;
+    font-size: larger;
   }
   
   input {
