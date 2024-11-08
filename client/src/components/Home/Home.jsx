@@ -4,89 +4,87 @@ import DriverCard from '../Driver Card/DriverCard.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
 import SearchBar from '../Search Bar/SearchBar.jsx';
 import Navbar from '../NavBar/NavBar.jsx';
-import { searchDrivers } from '../../redux/actionCreator.js';
 import './Home.css';
 
-
 const HomePage = () => {
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [isSorted, setIsSorted] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState('ALL');
   const [originSort, setOriginSort] = useState('ALL');
+  const [searchTerm, setSearchTerm] = useState('');
   const driversPerPage = 9;
 
-  const searchResults = useSelector((state) => state.search.searchResults);
-  const allDrivers = useSelector((state) => state.fetch.allDrivers);
+  const {allDrivers} = useSelector((state) => state.fetch);
   const teamsState = useSelector((state) => state.collectTeams);
+  console.log(allDrivers)
+  const filteredDrivers = allDrivers
+  .filter((driver) => {
+    const teamMatch = selectedTeam === 'ALL' || (Array.isArray(driver?.teams) ? driver?.teams?.includes(selectedTeam) : driver?.teams === selectedTeam);
 
-  let drivers = (searchResults && searchResults.length > 0) ? searchResults : allDrivers;
+    const originMatch =
+      originSort === 'ALL' ||
+      (originSort === 'Api' && typeof driver?.id === 'number') ||
+      (originSort === 'BDD' && typeof driver?.id === 'string');
 
-  if (originSort === 'Api') {
-    drivers = drivers.filter(driver => typeof driver.id === 'number');
-  } else if (originSort === 'BDD') {
-    drivers = drivers.filter(driver => typeof driver.id === 'string');
-  }
+    // Filtrar por término de búsqueda
+    const searchMatch =
+      (driver?.name?.forename?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      driver.name?.surname?.toLowerCase().includes(searchTerm.toLowerCase()));
 
-  const filteredDrivers = selectedTeam !== 'ALL'
-    ? drivers.filter(driver => driver.teams === selectedTeam)
-    : drivers;
+    return teamMatch && originMatch && searchMatch;
+  });
+  console.log(filteredDrivers)
 
+  // Ordenar conductores si está activado
   const sortedDrivers = isSorted
     ? [...filteredDrivers].sort((a, b) => a.name?.forename?.localeCompare(b.name.forename))
     : filteredDrivers;
 
+  // Paginación
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = sortedDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
-
   const totalPages = Math.ceil(sortedDrivers.length / driversPerPage);
 
-  const onPageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  // Manejadores de eventos
+  const onPageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handleSortChange = () => setIsSorted((prev) => !prev);
+  const handleTeamChange = (e) => setSelectedTeam(e.target.value);
+  const handleOriginChange = (e) => setOriginSort(e.target.value);
+  const handleSearch = (term) => setSearchTerm(term);
 
-  const handleSearch = (searchTerm) => {
-    dispatch(searchDrivers(searchTerm));
-  };
-
-  const handleSortChange = (event) => {
-    setIsSorted(event.target.checked);
-  };
-
-  const handleTeamChange = (event) => {
-    setSelectedTeam(event.target.value);
-  };
-
-  const handleOriginInputChange = (event) => {
-    setOriginSort(event.target.value);
-  };
-
+  console.log("current ====>", currentDrivers)
   return (
     <>
       <Navbar />
-      <SearchBar onSearch={handleSearch} />
-
-      <div id='filters'>
-        <select onChange={handleOriginInputChange}>
-          <option value="ALL">ALL</option>
-          <option value="Api">Api</option>
-          <option value="BDD">Base Datos</option>
-        </select>
-
-        <input type="checkbox" onChange={handleSortChange} /> Sort alphabetically
-        <select className='teams' onChange={handleTeamChange}>
-          <option value="ALL">ALL</option>
-          {teamsState.data.map((team) => (
-            <option value={team}>{team}</option>
-          ))}
-        </select>
-      </div>
-
       <div id="homeP">
-        {currentDrivers.map((driver) => (
-          <DriverCard key={driver.id} driver={driver} />
-        ))}
+        <SearchBar onSearch={handleSearch} />
+        <div id="filters">
+          <select onChange={handleOriginChange}>
+            <option value="ALL">Todos</option>
+            <option value="Api">API</option>
+            <option value="BDD">Base de Datos</option>
+          </select>
+          <label>
+            <input type="checkbox" onChange={handleSortChange} checked={isSorted} />
+            Ordenar alfabéticamente
+          </label>
+          <select onChange={handleTeamChange} value={selectedTeam}>
+            <option value="ALL">Todos</option>
+            {teamsState?.data?.map((team) => (
+              <option key={team} value={team}>{team}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="cardsSection">
+          {allDrivers.length === 0 && <p className="loading">Cargando...</p>}
+          {allDrivers.length > 0 && currentDrivers.length === 0 && <p className="warning">No hay resultados para los criterios seleccionados</p>}
+          {currentDrivers.map((driver, index) => (
+            <DriverCard key={index} driver={driver} />
+          ))}
+        </div>
+
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

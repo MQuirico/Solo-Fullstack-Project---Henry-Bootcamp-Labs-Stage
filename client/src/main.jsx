@@ -4,10 +4,15 @@ import App from './App.jsx'
 import './index.css'
 import store from './redux/store'
 import { Provider } from 'react-redux';
+import '@fontsource/titan-one';
+import '@fontsource/viga';
+import '@fontsource/mitr';
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <Provider store={store}>
-      <App />
+      <App className="App"/>
     </Provider>
   </React.StrictMode>,
 )

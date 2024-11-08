@@ -3,9 +3,14 @@
 :root {
   
   text-align: center;
-  background-image: url('../../../Fotos F1 PI/3.jpg');
-  background-size: cover;
+  background-image: url("https://cdn.ferrari.com/cms/network/media/img/resize/647392278b6cca0022f0dd02-monaco-grand-prix-2023-race-report-landscape");
   background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
+  position: fixed;
+  right: 0.6%;
+  top: 0%;
+  width: 100vw;
+  height: 100vh;
 
 }

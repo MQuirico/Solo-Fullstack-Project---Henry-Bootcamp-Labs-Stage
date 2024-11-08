@@ -1,30 +1,46 @@
 #logo {
-    height: 92px;
-    width: 120px;
-    position: fixed;
-    right: 0;
+    height: 100%;
+    width: 8%;
+    position: absolute;
+    right: 0%;
 }
 nav {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
+    height: 12%;
     background-color: #f71414;
     z-index: 1000;
-    text-align: left;
+    font-family: 'Titan One', system-ui;
+    color: white;
+    display:flex;
+    flex-direction: row;
+
    }
    
-   nav a {
+   nav .home {
+    position: absolute;
+
     float: left;
-    display: block;
-    color: #000000;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
-    font-size: larger
+    font-size: larger;
+    color: white;
+    text-shadow: 2px 2px 2px black
+   }
+
+   nav .create {
+    position: absolute;
+    left: 7vw;
+    color: white;
+
    }
    
-   nav a:hover {
+   nav h3:hover {
     background-color: #ddd;
     color: black;
+    text-shadow: 2px 2px 2px red;
+    border-radius: 10%
+
    }
    

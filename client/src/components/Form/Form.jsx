@@ -1,168 +1,124 @@
-// FormPage.jsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDriver } from '../../redux/actionCreator.js';
 import { fetchData } from '../../redux/actionCreator.js';
+import { useForm } from "react-hook-form"
 import Navbar from '../NavBar/NavBar.jsx';
+import PositionedSnackbar from "../ToastAlert/toastAlert"
 import './Form.css'
 
 const FormPage = () => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    nombre: '',
-    apellido: '',
-    descripcion: '',
-    imagen: null,
-    nacionalidad: '',
-    fechaNacimiento: '',
-    teams: ''
-  });
+  const [isCreated, setIsCreated] = useState(false)
+  const {data} = useSelector((state) => state.collectTeams)
+  const { register, handleSubmit, reset, formState, resetField, clearErrors } = useForm()
 
-  const [formErrors, setFormErrors] = useState({
-    nombre: false,
-    apellido: false,
-    descripcion: false,
-    imagen: false,
-    nacionalidad: false,
-    fechaNacimiento: false,
-  });
-  
-  const teams = useSelector((state) => state.collectTeams.teams)
-
-  const isFormValid = () => {
-    return (
-      Object.values(formErrors).every((error) => !error) &&
-      Object.values(formData).every((value) => value)
-    );
+  const handlerSubmit = (data) => {
+    dispatch(createDriver(data))
+    reset()
+    setIsCreated(true)
   };
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
+console.log(formState)
 
-    let error = false;
-    switch (name) {
-      case 'nombre':
-      case 'apellido':
-      case 'descripcion':
-      case 'nacionalidad':
-        error = value.length < 3; 
-        break;
-      case 'fechaNacimiento':
-        error = !/^\d{2}\/\d{2}\/\d{4}$/.test(value);
-        break;
-      default:
-        break;
-    }
 
-    setFormErrors({ ...formErrors, [name]: error });
-    setFormData({ ...formData, [name]: type === 'file' ? e.target.files[0] : value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isFormValid()) {
-      try {
-        const [day, month, year] = formData.fechaNacimiento.split('/');
-        const formattedDate = `${year}-${month}-${day}`;
-        const formattedData = { ...formData, fechaNacimiento: formattedDate };
-  
-        dispatch(createDriver(formattedData));
-        dispatch(fetchData());
-      } catch (error) {
-        window.alert('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
-        console.error('Error al enviar el formulario:', error);
-      }
-    } else {
-      alert('Por favor, complete todos los campos correctamente.');
-    }
-  };
-
-  const handleTeamChange = (e) =>{
-    e.preventDefault();
-    setFormData((prev) => ({...prev, teams: e.target.value}))
-  }
-
-  
   return (
     <>
     <Navbar />
-    <div>
-      <h1 id='titulo'>Formulario para Crear un Nuevo Conductor</h1>
-      <form onSubmit={handleSubmit}>
-        <div id='form'>
+    
+      <h1 id='titulo'>Ingrese los datos del conductor a crear</h1>
+      <form id='form' onSubmit={handleSubmit(handlerSubmit)}>
+        
           <label htmlFor="nombre">Nombre *</label>
           <input
             placeholder='Ingrese aquí su nombre...'
             type="text"
+            maxLength= "50"
             id="nombre"
             name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
+            {...register("nombre", {required: "Ingrese el nombre del conductor"})}
+           
           />
-        </div>
-        <div>
+          
+        
           <label htmlFor="apellido">Apellido *</label>
           <input
             placeholder='Aquí su apellido...'
             type="text"
+            maxLength= "50"
             id="apellido"
             name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
+            {...register("apellido", {required: "Ingrese el apellido del conductor"})}
+            
           />
-        </div>
-        <div>
+          
+        
           <label htmlFor="descripcion">Descripción *</label>
           <textarea
+            maxLength="500"
             placeholder='Dé una presentación del conductor...'
             id="descripcion"
             name="descripcion"
-            value={formData.descripcion}
-            onChange={handleChange}
+            {...register("descripcion", {required: "Ingrese una descripción"})}
           />
-        </div>
-        <div>
+          
+        
           <label htmlFor="nacionalidad">Nacionalidad *</label>
           <input
             placeholder='Ingrese su nacionalidad...'
             type="text"
+            maxLength= "50"
             id="nacionalidad"
             name="nacionalidad"
-            value={formData.nacionalidad}
-            onChange={handleChange}
+            {...register("nacionalidad", {required: "Ingrese la nacionalidad del conductor" })}
           />
-        </div>
-        <select id='teams selector' onChange={handleTeamChange}>
-          {teams.map((team)=>(
+          
+        
+        <select id='teams selector' 
+      
+        {...register("escudería", {required: "Seleccione una escudería"})}
+        >
+           {data.map((team)=>(
             <option value={team}>{team}</option>
-          ))}
+          ))} 
         </select>
-        <div>
+        
+        
           <label htmlFor="fechaNacimiento">Fecha de Nacimiento *</label>
           <input
             placeholder='Ingrese la fecha con el siguiente formato: (DD/MM/YYYY)'
             type="text"
+            maxLength= "50"
             id="fechaNacimiento"
             name="fechaNacimiento"
-            value={formData.fechaNacimiento}
-            onChange={handleChange}
+            {...register("fechaNacimiento", {required: "Falta la fecha de nacimiento", pattern: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/, message: "El formato es incorrecto"})}
+           
           />
-        </div>
-        <div>
+          
+
           <label htmlFor="imagen">Imagen *</label>
           <input
             type="file"
             id="imagen"
+            maxLength= "50"
             name="imagen"
+            {...register("imagen", {required: "Suba una imagen de perfil del conductor"})}
             accept="image/*"
-            onChange={handleChange}
           />
-        </div>
-        <button type="submit" disabled={!isFormValid()} >
+        
+        <button type="submit" >
           Crear Conductor
         </button>
       </form>
-    </div>
+      {formState?.errors?.nombre?.type === "required" && <h3 className="erReqNom">{formState?.errors?.nombre?.message} </h3>}
+      {formState?.errors?.apellido?.type === "required" && <h3 className="erReqApe">{formState?.errors?.apellido?.message} </h3>}
+      {formState?.errors?.descripcion?.type === "required" && <h3 className="erReqDesc">{formState?.errors?.descripcion?.message} </h3>}
+      {formState?.errors?.nacionalidad?.type === "required" && <h3 className="erReqNac">{formState?.errors?.nacionalidad?.message} </h3>}
+      {formState?.errors?.escudería?.type === "required" && <h3 className="erReqTeam">{formState?.errors?.escudería?.message} </h3>}
+      {formState?.errors?.fechaNacimiento?.type === "required" && <h3 className="erReqBirth">{formState?.errors?.fechaNacimiento?.message} </h3>}
+      {formState?.errors?.fechaNacimiento?.type === "pattern" && <h3 className="erPattBirth">Ingrese una fecha con formato válido</h3>}
+      {formState?.errors?.imagen?.type === "required" && <h3 className="erReqImg">{formState?.errors?.imagen?.message} </h3>}
+      {isCreated === true && <PositionedSnackbar />}
     </>
   );
 };

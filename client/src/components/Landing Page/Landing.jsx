@@ -27,7 +27,7 @@ function Landing() {
             una Single Page Application, así como también la Base de Datos en la que se almacenan
             los pilotos/conductores mediante un Formulario Controlado.
             <br />
-            <strong>(PD: no tengo más migraciones disponibles, por favor considere esto)</strong>
+            
           </p>
         </section>
         <section className="tematica">

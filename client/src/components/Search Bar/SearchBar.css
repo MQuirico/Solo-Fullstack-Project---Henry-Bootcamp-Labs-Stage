@@ -1,36 +1,15 @@
-#search-bar-container {
-    display: flex;
-    align-items: center;
-    max-width: 200%;
-    border-radius: 20%;
-    justify-content:flex-end
-  }
+
    
   
   #search {
-    padding: 8px;
+    position: absolute;
+    left: 15vw;
+    top: 3vh;
     font-size: 16px;
-    margin-right: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
     width: 180px;
+    position: relative;
+    
   }
-  
-  #boton {
-    padding: 8px 16px;
-    font-size: 16px;
-    background-color: #ff9270;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 136px
-  }
-
-  
-  #boton:hover {
-    background-color: rgb(139, 163, 0);
-  }
-  

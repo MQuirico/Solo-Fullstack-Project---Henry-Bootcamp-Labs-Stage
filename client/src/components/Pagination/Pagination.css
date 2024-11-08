@@ -1,12 +1,17 @@
-/* Estilo para el contenedor principal */
 .pagination-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+    position:absolute;
+    bottom: 0%;
+    left: 25%;
+    width: 50%;
+    height: 5%;
+    min-height: 5%;
+    max-height: 5%;
   }
   
-  /* Estilo para el botón de página */
   .pages {
     padding: 5px 10px;
     margin: 0 5px;
@@ -15,13 +20,11 @@
     cursor: pointer;
   }
   
-  /* Estilo para el botón "Anterior" */
   .pagination-container button:first-child {
-    order: -1; /* Mueve este botón al extremo izquierdo */
+    order: -1; 
   }
   
-  /* Estilo para el botón "Siguiente" */
   .pagination-container button:last-child {
-    order: 1; /* Mueve este botón al extremo derecho */
+    order: 1; 
   }
   

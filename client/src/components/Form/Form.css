@@ -1,37 +1,66 @@
 
   
   form {
-    width: 420px;
-    padding: 20px;
+    position: fixed;
+    top: 17vh;
+    left: 5vw;
+    width: 35vw;
+    min-width: 35vw;
+    max-width: 35vw;
+    height: 70vh;
+    min-height: 70vh;
+    max-height: 70vh;
+    padding: 2% 2% 2% 2%;
     border: 5px solid #cccccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #da8846;
-    justify-content: center;
-    margin-top: 50px; /* Ajusta este valor según sea necesario para mover el formulario hacia abajo */
+    justify-content: space-between ;
+    align-content: center;
+    align-items: center;
+    font-family: 'Viga', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: normal;
+    animation: slide-in-left 1s ease-in-out
   }
-  h1 {
-    text-align: center;
-    color: #333;
+
+  #titulo {
+    text-align: right;
+    color: #ffffff;
+    position: absolute; 
+    top: 8vh;
+    left: 65vw;
+    font-family: 'Mitr', sans-serif;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    width: 20vw;
+    animation: slide-in-right 1s ease-in-out
   }
   
   label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 2%;
     color: #555;
-    font-size: larger;
+    font-size: 75%;
   }
   
   input {
-    width: 100%;
+    width: 90%;
     padding: 8px;
-    margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    margin-bottom: 2%;
+  }
+
+  textarea {
+    min-width: 90%;
+    max-width: 90%;
+    width: 90%;
+    height: 30%
   }
   
-  button {
+  #form button {
     width: 100%;
     padding: 10px;
     background-color: #4caf50;
@@ -48,7 +77,97 @@
     color: #aaa;
     cursor: not-allowed;
   }
+
+  .erReqNom{
+    position: absolute;
+    left:47vw;
+    top:23vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+
+  }
+
+  .erReqApe{
+    position: absolute;
+    left:47vw;
+    top:33vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+
+  }
+
+  .erReqDesc{
+    position: absolute;
+    left:47vw;
+    top:43vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+
+  }
+
+  .erReqNac{
+    position: absolute;
+    left:47vw;
+    top:53vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+  }
+
+  .erReqTeam{
+    position: absolute;
+    left:47vw;
+    top:63vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+  }
+
+  .erReqBirth{
+    position: absolute;
+    left:47vw;
+    top:66vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+
+  }
+
+  .erPattBirth{
+    position: absolute;
+    left:47vw;
+    top:66vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+  }
   
-  button:hover {
-    background-color: #45a049;
+  .erReqImg{
+    position: absolute;
+    left:47vw;
+    top:76vh;
+    font-family: 'Viga', sans-serif;
+    background-color: white;
+  }
+  
+  @keyframes slide-in-left {
+    0% {
+      -webkit-transform: translateX(-1000px);
+              transform: translateX(-1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+              transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
   }

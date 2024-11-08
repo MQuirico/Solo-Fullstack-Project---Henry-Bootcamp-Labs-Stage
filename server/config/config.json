@@ -4,20 +4,23 @@
     "password": "maturoman10",
     "database": "postgres",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "port": 5432
   },
   "test": {
     "username": "postgres",
     "password": "maturoman10",
     "database": "postgres",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "port": 5432
   },
   "production": {
     "username": "postgres",
     "password": "maturoman10",
     "database": "postgres",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "port": 5432
   }
 }

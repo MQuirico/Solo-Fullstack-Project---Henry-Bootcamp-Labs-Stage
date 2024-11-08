@@ -1,20 +1,40 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchDriver } from '../../redux/actionCreator'; // Reemplaza esto con la ruta correcta de tu acción.
+import styled, { keyframes } from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../NavBar/NavBar'
 
+const scaleIn = keyframes`
+ 0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    opacity: 1;
+  }
+`
+
 const Card = styled.div`
+  animation: ${scaleIn} 1s ease-in-out;
   display: flex;
   border: 1px solid #ccc;
   border-radius: 8px;
+  border: 6px solid whitesmoke;
   overflow: hidden;
-  max-width: 600px;
-  margin: 20px auto;
-  margin-top: 130px;
-  background-color: lightblue 
+  max-width: 70vw;
+  width: 70vw;
+  position: absolute;
+  top: 10vh;
+  left: 13vw;
+  background-color: rgba(167, 143, 115, 0.9);
+  font-family: 'Viga', sans-serif;
+
 `;
 
 const Image = styled.img`
@@ -45,15 +65,11 @@ const Link = styled.a`
 `;
 
 const Detail = () => {
-  const { id } = useParams();
-  const driver = useSelector((state) => state.driver.data);
-  const dispatch = useDispatch();
-  console.log(driver)
- useEffect(() => {
-    dispatch(fetchDriver(id));
-  }, [id, dispatch]);
+const location = useLocation()
+const driver = location?.state?.driver
+ 
 
-  if (typeof driver.id === 'string') {
+  if (typeof driver?.id === 'string') {
     return (
       <>
         <Navbar />
