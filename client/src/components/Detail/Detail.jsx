@@ -67,39 +67,30 @@ const Link = styled.a`
 const Detail = () => {
 const location = useLocation()
 const driver = location?.state?.driver
+var finalDBdate
  
+console.log(driver)
+console.log(typeof driver?.birthDate)
 
-  if (typeof driver?.id === 'string') {
+if (typeof driver?.id === "string"){
+let fechaDB = new Date(driver?.birthDate)
+fechaDB.toLocaleDateString(navigator.language, {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric"
+})
+finalDBdate = fechaDB.toString()
+}
+ 
     return (
       <>
         <Navbar />
         <Card>
-          <Image src={driver?.image?.data} alt={driver?.name} />
-          <Content>
-            <Title>{`${driver?.name} ${driver?.lastName}`}</Title>
-            <Paragraph>Nacionalidad: {driver?.nationality}</Paragraph>
-            <Paragraph>Fecha de Nacimiento: {new Date(driver?.birthDate).toLocaleDateString()}</Paragraph>
-            <Paragraph>Equipos: {driver?.Teams.join(', ')}</Paragraph>
-            <Paragraph>Descripción: {driver?.description}</Paragraph>
-            <Paragraph>
-              <Link href={driver?.url} target="_blank" rel="noopener noreferrer">
-                Más información
-              </Link>
-            </Paragraph>
-          </Content>
-        </Card>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Navbar />
-        <Card>
-          <Image src={driver?.image?.url} alt={driver?.driverRef} />
+          <Image src={driver?.image?.url || driver?.image} alt={driver?.driverRef} />
           <Content>
             <Title>{`${driver?.name?.forename} ${driver?.name?.surname}`}</Title>
             <Paragraph>Nacionalidad: {driver?.nationality}</Paragraph>
-            <Paragraph>Fecha de Nacimiento: {driver?.dob}</Paragraph>
+            <Paragraph>Fecha de Nacimiento: {driver?.dob}{finalDBdate} </Paragraph>
             <Paragraph>Equipos: {driver?.teams}</Paragraph>
             <Paragraph>Descripción: {driver?.description}</Paragraph>
             <Paragraph>
@@ -111,7 +102,7 @@ const driver = location?.state?.driver
         </Card>
       </>
     );
-  }
+  
 };
 
 export default Detail;

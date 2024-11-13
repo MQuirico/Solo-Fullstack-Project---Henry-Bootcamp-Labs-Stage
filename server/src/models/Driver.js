@@ -7,19 +7,16 @@ module.exports = (sequelize) => {
             primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
     image: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     nationality: {
@@ -30,6 +27,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    teams: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+    
   })
 return Driver
 };

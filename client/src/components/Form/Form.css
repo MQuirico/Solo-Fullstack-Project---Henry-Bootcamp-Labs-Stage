@@ -57,7 +57,8 @@
     min-width: 90%;
     max-width: 90%;
     width: 90%;
-    height: 30%
+    height: 30%;
+    resize: vertical
   }
   
   #form button {
@@ -84,7 +85,7 @@
     top:23vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
-
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erReqApe{
@@ -93,7 +94,7 @@
     top:33vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
-
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erReqDesc{
@@ -102,32 +103,34 @@
     top:43vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
-
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erReqNac{
     position: absolute;
     left:47vw;
-    top:53vh;
+    top:51vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erReqTeam{
     position: absolute;
     left:47vw;
-    top:63vh;
+    top:60vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erReqBirth{
     position: absolute;
     left:47vw;
-    top:66vh;
+    top:68vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
-
+    animation: tracking-in-expand 1s ease-in-out
   }
 
   .erPattBirth{
@@ -136,6 +139,7 @@
     top:66vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
+    animation: tracking-in-expand 1s ease-in-out
   }
   
   .erReqImg{
@@ -144,7 +148,20 @@
     top:76vh;
     font-family: 'Viga', sans-serif;
     background-color: white;
+    animation: tracking-in-expand 1s ease-in-out
   }
+
+  #form #upload_widget{
+    background-color: blue;
+    width: 50%;
+    margin-bottom: 4%;
+  }
+
+  #form #upload_widget:disabled{
+    background-color: grey;
+    cursor: not-allowed
+  }
+
   
   @keyframes slide-in-left {
     0% {
@@ -171,3 +188,17 @@
       opacity: 1;
     }
   }
+
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

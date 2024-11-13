@@ -31,9 +31,11 @@ const HomePage = () => {
       (driver?.name?.forename?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       driver.name?.surname?.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    return teamMatch && originMatch && searchMatch;
+    return teamMatch && originMatch && searchMatch
   });
   console.log(filteredDrivers)
+
+  
 
   // Ordenar conductores si está activado
   const sortedDrivers = isSorted

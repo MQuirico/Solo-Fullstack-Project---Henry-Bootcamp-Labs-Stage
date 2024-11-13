@@ -1,26 +1,58 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDriver } from '../../redux/actionCreator.js';
-import { fetchData } from '../../redux/actionCreator.js';
 import { useForm } from "react-hook-form"
 import Navbar from '../NavBar/NavBar.jsx';
-import PositionedSnackbar from "../ToastAlert/toastAlert"
+import PositionedSnackbar from "../ToastAlert/toastAlert";
+import UploadWidget from "./uploadWidget.jsx"
 import './Form.css'
 
 const FormPage = () => {
   const dispatch = useDispatch();
   const [isCreated, setIsCreated] = useState(false)
+  const [picture, setPicture] = useState(null)
+  const [disabled, setDisabled] = useState(false)
   const {data} = useSelector((state) => state.collectTeams)
   const { register, handleSubmit, reset, formState, resetField, clearErrors } = useForm()
 
   const handlerSubmit = (data) => {
-    dispatch(createDriver(data))
+    if (picture === null){
+      window.alert("Sube una imagen de perfil del conductor")
+    }
+    else
+   { dispatch(createDriver({
+      imagen: picture,
+      ...data}))
     reset()
-    setIsCreated(true)
+    setIsCreated(true)}
   };
 
-console.log(formState)
+  const teams = [null, ...data]
+  console.log(picture)
 
+  const root = document.querySelector(":root")
+
+  root.addEventListener("click", ()=>{
+    setIsCreated(false)
+  })
+
+  const widget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: 'ds4blfuip', 
+      uploadPreset: 'ml_default',
+      sources: ['local', 'url'], 
+      resourceType: 'image', 
+      clientAllowedFormats: ['jpg', 'png', 'jpeg'],
+      maxFiles: 1
+    },
+    (error, result) => {
+      if (!error && result && result.event === 'success') {
+        console.log(result)
+        setPicture(result.info.secure_url)
+        setDisabled(true)
+      }
+    }
+  );
 
   return (
     <>
@@ -73,13 +105,14 @@ console.log(formState)
             {...register("nacionalidad", {required: "Ingrese la nacionalidad del conductor" })}
           />
           
-        
-        <select id='teams selector' 
-      
+        <label htmlFor="teams">Escudería *</label>
+        <select 
+        id='teams selector'
+        name="teams" 
         {...register("escudería", {required: "Seleccione una escudería"})}
         >
-           {data.map((team)=>(
-            <option value={team}>{team}</option>
+           {teams.map((team, index)=>(
+            <option key={index} value={team}>{team}</option>
           ))} 
         </select>
         
@@ -91,22 +124,17 @@ console.log(formState)
             maxLength= "50"
             id="fechaNacimiento"
             name="fechaNacimiento"
-            {...register("fechaNacimiento", {required: "Falta la fecha de nacimiento", pattern: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/, message: "El formato es incorrecto"})}
+            {...register("fechaNacimiento", 
+            {required: "Falta la fecha de nacimiento", 
+            pattern: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/, 
+            message: "El formato es incorrecto"})}
            
           />
           
 
-          <label htmlFor="imagen">Imagen *</label>
-          <input
-            type="file"
-            id="imagen"
-            maxLength= "50"
-            name="imagen"
-            {...register("imagen", {required: "Suba una imagen de perfil del conductor"})}
-            accept="image/*"
-          />
+          <UploadWidget widget={widget} disabled={disabled} />
         
-        <button type="submit" >
+        <button type="submit">
           Crear Conductor
         </button>
       </form>
@@ -117,7 +145,7 @@ console.log(formState)
       {formState?.errors?.escudería?.type === "required" && <h3 className="erReqTeam">{formState?.errors?.escudería?.message} </h3>}
       {formState?.errors?.fechaNacimiento?.type === "required" && <h3 className="erReqBirth">{formState?.errors?.fechaNacimiento?.message} </h3>}
       {formState?.errors?.fechaNacimiento?.type === "pattern" && <h3 className="erPattBirth">Ingrese una fecha con formato válido</h3>}
-      {formState?.errors?.imagen?.type === "required" && <h3 className="erReqImg">{formState?.errors?.imagen?.message} </h3>}
+      
       {isCreated === true && <PositionedSnackbar />}
     </>
   );

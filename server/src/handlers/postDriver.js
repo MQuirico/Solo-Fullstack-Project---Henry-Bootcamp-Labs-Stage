@@ -2,7 +2,7 @@ const { createDriver } = require('../../controllers/postRouteController.js');
 
 const postDriver = async (req, res) => {
 
-  const { nombre, apellido, descripcion, imagen, nacionalidad, fechaNacimiento, teamIds } = req.body;
+  const { nombre, apellido, descripcion, imagen, nacionalidad, escudería ,fechaNacimiento, teamIds } = req.body;
   console.log(req.body)
   try {
     const newDriver = await createDriver({
@@ -12,6 +12,7 @@ const postDriver = async (req, res) => {
       imagen,
       nacionalidad,
       fechaNacimiento,
+      escudería,
       teamIds,
     });
 
