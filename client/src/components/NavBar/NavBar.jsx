@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import './NavBar.css'
+import logo from "../../../Fotos F1 PI/logo-f1.jpg"
 
 const Navbar = () => {
     return (
@@ -15,7 +16,7 @@ const Navbar = () => {
         <Link to="/">
         <img 
         id='logo' 
-        src='../../../Fotos F1 PI/logo-f1.jpg' 
+        src={logo}
         />
         </Link>
       </nav>
