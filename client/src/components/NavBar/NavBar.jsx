@@ -8,7 +8,7 @@ const Navbar = () => {
         <Link to="/Home">
             <h3 className="home">🏠Home</h3>
         </Link>
-        <Link to="/cr.Driver">
+        <Link to="/crDriver">
             <h3 className="create">🏎️Crear Driver</h3>
         </Link>
         

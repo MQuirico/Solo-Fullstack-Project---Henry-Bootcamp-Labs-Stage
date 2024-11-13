@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    historyApiFallback: true // Esto permite manejar rutas en el cliente
+    hmr: true, 
+    historyApiFallback: true, 
   }
 })

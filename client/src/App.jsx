@@ -26,10 +26,10 @@ const teamsState = useSelector((state) => state.collectTeams);
   return (
       <Router>
           <Routes> 
-            <Route path="/" element={<Landing />} />
-            <Route path="/Home" element={<HomePage />} />
-            <Route path="/cr.Driver" element={<FormPage />} />
-            <Route path="/driverDetail/:id" element={<Detail />} />
+            <Route exact path="/" element={<Landing />} />
+            <Route exact path="/Home" element={<HomePage />} />
+            <Route exact path="/crDriver" element={<FormPage />} />
+            <Route exact path="/driverDetail/:id" element={<Detail />} />
           </Routes>
       </Router>
   );
