@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DriverCard from '../Driver Card/DriverCard.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
@@ -16,7 +16,9 @@ const HomePage = () => {
 
   const {allDrivers} = useSelector((state) => state.fetch);
   const teamsState = useSelector((state) => state.collectTeams);
-  console.log(allDrivers)
+
+  
+  
   const filteredDrivers = allDrivers
   .filter((driver) => {
     const teamMatch = selectedTeam === 'ALL' || (Array.isArray(driver?.teams) ? driver?.teams?.includes(selectedTeam) : driver?.teams === selectedTeam);
@@ -27,9 +29,9 @@ const HomePage = () => {
       (originSort === 'BDD' && typeof driver?.id === 'string');
 
     // Filtrar por término de búsqueda
-    const searchMatch =
-      (driver?.name?.forename?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      driver.name?.surname?.toLowerCase().includes(searchTerm.toLowerCase()));
+    const searchMatch = 
+     (driver?.name?.forename?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  driver.name?.surname?.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return teamMatch && originMatch && searchMatch
   });
@@ -50,12 +52,21 @@ const HomePage = () => {
 
   // Manejadores de eventos
   const onPageChange = (pageNumber) => setCurrentPage(pageNumber);
-  const handleSortChange = () => setIsSorted((prev) => !prev);
-  const handleTeamChange = (e) => setSelectedTeam(e.target.value);
-  const handleOriginChange = (e) => setOriginSort(e.target.value);
-  const handleSearch = (term) => setSearchTerm(term);
+  const handleSortChange = () => {
+    setIsSorted((prev) => !prev)
+  };
+  const handleTeamChange = (e) => {
+    setSelectedTeam(e.target.value)
+  };
+  const handleOriginChange = (e) => {
+    setOriginSort(e.target.value)
+  };
+  const handleSearch = (term) => {
+    setSearchTerm(term)
+  };
 
-  console.log("current ====>", currentDrivers)
+  
+
   return (
     <>
       <Navbar />
@@ -83,7 +94,7 @@ const HomePage = () => {
           {allDrivers.length === 0 && <p className="loading">Cargando...</p>}
           {allDrivers.length > 0 && currentDrivers.length === 0 && <p className="warning">No hay resultados para los criterios seleccionados</p>}
           {currentDrivers.map((driver, index) => (
-            <DriverCard key={index} driver={driver} />
+            <DriverCard key={driver.id} driver={driver} />
           ))}
         </div>
 

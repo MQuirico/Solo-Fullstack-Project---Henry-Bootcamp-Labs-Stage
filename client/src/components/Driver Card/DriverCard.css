@@ -5,6 +5,7 @@
     max-width: 1500px;
     overflow:hidden;
     font-family: 'Viga', sans-serif;
+    animation: swing-in-top-fwd 1s ease-in-out;
   }
   
 
@@ -76,4 +77,21 @@
 
   .driver-card:hover {
     transform: scale(1.05);
+  }
+
+  @keyframes swing-in-top-fwd {
+    0% {
+      -webkit-transform: rotateX(-100deg);
+              transform: rotateX(-100deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotateX(0deg);
+              transform: rotateX(0deg);
+      -webkit-transform-origin: top;
+              transform-origin: top;
+      opacity: 1;
+    }
   }

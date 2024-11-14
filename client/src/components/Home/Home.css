@@ -53,8 +53,7 @@
 #homeP .cardsSection .warning{
   position: absolute;
   font-family: 'Viga', sans-serif;
-  top: 30vh;
-  left: 50vh;
+  margin: 15% 20% 10% 25%;
   color: white;
   text-shadow: 2px 2px 2px black;
   font-size: 4vh;
@@ -65,8 +64,7 @@
 #homeP .cardsSection .loading{
   position: absolute;
   font-family: 'Viga', sans-serif;
-  top: 30vh;
-  left: 90vh;
+  margin: 15% 20% 10% 45%;
   color: white;
   text-shadow: 2px 2px 2px black;
   font-size: 4vh;

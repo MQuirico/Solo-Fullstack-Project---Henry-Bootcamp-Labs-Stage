@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Landing.css'; 
+import './Landing.css';
+import logo from "../../../../Form1.png" 
 function Landing() {
   return (
     <div id="land" className="blog">
@@ -11,7 +12,7 @@ function Landing() {
         <h1 id='title'>
           <u>🏁DRIVERS</u>
         </h1>
-        <img id='imgF1' src="../Form1.png" alt="Logo" />
+        <img id='imgF1' src={logo} alt="Logo" />
       </header>
       <div className="descripcion">
         <section className="intro">
