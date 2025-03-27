@@ -3,7 +3,7 @@ import axios from 'axios';
 export const fetchData = () => async (dispatch) => {
   try {
     dispatch({ type: 'FETCH_DATA_REQUEST' });
-    const response = await axios.get('https://driversbackend-production.up.railway.app/drivers');
+    const response = await axios.get('https://driversbackend-py4r.onrender.com/drivers');
     dispatch({ type: 'FETCH_DATA_SUCCESS', payload: response.data });
   } catch (error) {
     console.error('Error al cargar datos:', error);
@@ -28,7 +28,7 @@ export const searchDrivers = (searchTerm) => async (dispatch) => {
   console.log(searchTerm)
   try {
     dispatch({ type: 'SEARCH_DRIVERS_REQUEST' });
-    const response = await axios.get(`https://driversbackend-production.up.railway.app/drivers/name?name=${searchTerm}`);
+    const response = await axios.get(`https://driversbackend-py4r.onrender.com/drivers/name?name=${searchTerm}`);
     dispatch({ type: 'SEARCH_DRIVERS_SUCCESS', payload: response.data });
   } catch (error) {
     console.error('Error while searching drivers:', error);
@@ -39,7 +39,7 @@ export const searchDrivers = (searchTerm) => async (dispatch) => {
   export const createDriver = (formData) => async (dispatch) => {
     try {
       dispatch({ type: 'CREATE_DRIVER_REQUEST' });
-      const response = await axios.post('https://driversbackend-production.up.railway.app/drivers', formData);
+      const response = await axios.post('https://driversbackend-py4r.onrender.com/drivers', formData);
       dispatch({ type: 'CREATE_DRIVER_SUCCESS', payload: response.data.driver });
       dispatch(fetchData());
     } catch (error) {
@@ -51,7 +51,7 @@ export const searchDrivers = (searchTerm) => async (dispatch) => {
   export const collectTeams = () => async (dispatch) => {
     try {
       dispatch({ type: 'COLLECT_TEAMS_REQUEST' });
-      const response = await axios.get('https://driversbackend-production.up.railway.app/drivers');
+      const response = await axios.get('https://driversbackend-py4r.onrender.com/drivers');
       dispatch({ type: 'COLLECT_TEAMS_SUCCESS', payload: response.data });
       const teamsSet = new Set();
       response.data.forEach(driver => {
@@ -81,7 +81,7 @@ export const searchDrivers = (searchTerm) => async (dispatch) => {
 
   export const fetchDriver = (id) => async (dispatch) => {
     try {
-      const response = await axios.get(`https://driversbackend-production.up.railway.app/drivers/${id}`);
+      const response = await axios.get(`https://driversbackend-py4r.onrender.com/drivers/${id}`);
       dispatch({ type: 'FETCH_DRIVER', payload: response.data });
     } catch (error) {
       console.error('Error al obtener Driver:', error);
